@@ -1,0 +1,29 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{% static 'project/css/main.css' %}">
+</head>
+<body>
+<div class="wrapper">
+    <div class="logo"> <img src="https://disobr.ru/images/logo/logo_tusur_400.png" alt=""> </div>
+    <div class="text-center mt-4 name"> TUSUR </div>
+    <form class="p-3 mt-3" method="POST" action="registration">
+        {% csrf_token %}
+        <div class="form-field d-flex align-items-center"> <span class="far fa-user"></span> <input value="{{userName}}" type="text" name="userName" id="userName" placeholder="Username"> </div>
+        <div class="form-field d-flex align-items-center"> <span class="fas fa-key"></span> <input value="{{pwd}}" type="password" name="pwd" id="pwd" placeholder="Password"> </div>
+        <button class="btn mt-3" type="submit">Sign Up</button>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <br {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</br>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </form>
+    <div class="text-center fs-6"> <a href="http://127.0.0.1:8000/calcs">Already have account?</a>
+</div>
+</div>
+</body>
+</html>

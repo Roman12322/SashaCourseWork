@@ -1,0 +1,38 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your data</title>
+    <link rel="stylesheet" href="{% static 'project/css/data.css' %}">
+</head>
+<body>
+<div class="wrapper">
+    <div class="logo"> <img src="https://disobr.ru/images/logo/logo_tusur_400.png" alt=""> </div>
+    <div class="text-center mt-4 name"> TUSUR </div>
+    <form class="p-3 mt-3" action="gettingDATA" method="POST">
+        {% csrf_token %}
+        <div class="form-field d-flex align-items-center"> <span class="far fa-user"></span> <input value="{{userName}}" type="text" name="userName" id="userName" placeholder="Username"> </div>
+        <div class="form-field d-flex align-items-center"> <span class="fas fa-key"></span> <input value="{{pwd}}" type="password" name="pwd" id="pwd" placeholder="Password"> </div>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <br {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</br>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <button class="btn mt-3">Show data</button>
+    </form>
+    <div class="text-center fs-6"> <a href="http://127.0.0.1:8000/calcs">Go to calculation form?</a>
+</div>
+</div>
+{% if results.count > 0 %}
+<h2 id="header">All data of User</h2>
+    <table>
+        <tr><th> sequence 1 </th><th> sequence 2 </th><th> Result </th></tr>
+        {% for result in results %}
+            <tr><td>{{ result.sqn1 }}</td><td>{{ result.sqn2 }}</td><td>{{ result.result }}</td></tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

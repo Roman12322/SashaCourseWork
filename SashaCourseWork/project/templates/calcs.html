@@ -1,0 +1,32 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calcs</title>
+    <link rel="stylesheet" href="{% static 'project/css/calcs.css' %}">
+</head>
+<body>
+<div class="wrapper">
+    <div class="logo"> <img src="https://disobr.ru/images/logo/logo_tusur_400.png" alt=""> </div>
+    <div class="text-center mt-4 name"> TUSUR </div>
+    <form class="p-3 mt-3" action="calculate" method="POST">
+        {% csrf_token %}
+        <div class="form-field d-flex align-items-center"> <span class="far fa-user"></span> <input type="text" value="{{userName}}" name="userName" id="userName" placeholder="Username"> </div>
+        <div class="form-field d-flex align-items-center"> <span class="fas fa-key"></span> <input type="password" value="{{pwd}}" name="pwd" id="pwd" placeholder="Password"> </div>
+        <div class="form-field d-flex align-items-center"> <span class="far fa-user"></span> <input type="text" value="{{sequence1}}" name="sequence1" id="sequence1" placeholder="enter sequence 1:"> </div>
+        <div class="form-field d-flex align-items-center"> <span class="far fa-user"></span> <input type="text" value="{{sequence2}}" name="sequence2" id="sequence2" placeholder="enter sequence 2:"> </div>
+        <div class="form-field d-flex align-items-center"> <span class="far fa-user"></span> <input type="text" value="{{result}}" name="result" id="result" placeholder="there will be answer:"> </div>
+        <button class="btn mt-3" type="submit">Calculate</button>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <br {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</br>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </form>
+    <div class="text-center fs-6"> <a href="http://127.0.0.1:8000/data">Go to datas?</a>
+</div>
+</div>
+</body>
+</html>
