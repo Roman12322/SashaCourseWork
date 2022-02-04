@@ -82,7 +82,7 @@ def getData(request):
             results = Calculations.objects.filter(userId=checkUserData.id)
             return render(request, "data.html", {'results': results})
         except User.DoesNotExist:
-            messages.error(request, "Неверный логин или пароль")
+            messages.error(request, "Incorrct login or password")
             data = {
                 'userName': username,
                 'pwd': password,
